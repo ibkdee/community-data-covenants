@@ -12,3 +12,5 @@ jobs:
           python-version: '3.11'
       - run: python -m unittest -v
       - run: python experiment.py
+
+      - run: python transport_experiment.py
