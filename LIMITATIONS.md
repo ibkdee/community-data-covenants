@@ -6,6 +6,8 @@ The reference decision model assumes trusted inputs. It does not implement authe
 
 An institution cannot detect a withdrawal that has not reached it. Expiry can bound reliance on stale authorisation under specified assumptions; it cannot recall exported data or reverse training of an existing AI model.
 
+The separate revocation transport model implements a scoped, in-memory gateway and authenticated withdrawal messages with a simulated contact schedule. It does not provide real network delivery, durable state, key management or production identity verification.
+
 ## Evidence boundaries
 
 All experimental inputs are synthetic. Outage lengths and withdrawal probabilities are stress-test assumptions, not estimates of Nigerian field conditions. Request-level error rates are not participant-level harms or clinical outcomes. The experiment does not establish the security of the reference model or the superiority of any policy in practice.
@@ -18,4 +20,4 @@ No community deployment, host partnership or independent security assessment has
 
 ## Development provenance
 
-ChatGPT assisted with concept development, software implementation, test design and documentation. The repository records an exploratory technical contribution rather than evidence of independently authored production software.
+ChatGPT assisted with concept development, software implementation, test design and documentation. The development history records the evolution of the research prototype.
