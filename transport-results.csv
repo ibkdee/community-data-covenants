@@ -1,0 +1,5 @@
+policy,delivered,mean_latency_minutes,mean_post_withdrawal_reads,mean_pre_withdrawal_denials,uploads_completed,mean_upload_completion_minutes,mean_upload_bytes_pending
+FIFO,884,310.30,421.10,0.00,884,389.74,638.46
+Priority,1000,73.93,73.93,0.00,884,417.88,653.86
+FIFO + expiry,884,310.30,18.11,78.25,884,389.74,638.46
+Priority + expiry,1000,73.93,13.19,78.25,884,417.88,653.86
