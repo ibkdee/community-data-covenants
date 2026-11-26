@@ -1,6 +1,6 @@
 import unittest
 from dataclasses import replace
-from revocation import Gateway, sign, delivery_time
+from revocation import Gateway, sign, delivery_time, schedule
 from transport_experiment import run
 
 class RevocationTests(unittest.TestCase):
@@ -57,10 +57,22 @@ class RevocationTests(unittest.TestCase):
     def test_no_contact(self):
         self.assertIsNone(delivery_time(10,[1,2],0,100,True,50))
 
+    def test_shared_budget(self):
+        self.assertEqual(schedule(10,[10,20,30],200,100,True,50),(10,30,0,0))
+        self.assertEqual(schedule(10,[10,20,30],200,100,False,50),(30,20,0,0))
+
+    def test_censored_upload(self):
+        self.assertEqual(schedule(10,[10],200,100,True,50),(10,None,150,0))
+
+    def test_no_prewithdrawal_control(self):
+        self.assertEqual(schedule(20,[10],0,100,True,50),(None,0,0,50))
+
     def test_paired_experiment(self):
         result=run(episodes=10)
         for fifo, priority in zip(result['FIFO'],result['Priority']):
-            self.assertLessEqual(priority[0],fifo[0])
+            if fifo[0] is not None:
+                self.assertIsNotNone(priority[0])
+                self.assertLessEqual(priority[0],fifo[0])
             self.assertLessEqual(priority[1],fifo[1])
             self.assertEqual(priority[2],fifo[2])
 
