@@ -34,6 +34,17 @@ This project examines that tension through a policy decision model and a reprodu
 
 The experiment uses 36,237 post-withdrawal and 233,763 legitimate synthetic requests per policy. No policy dominates all alternatives on both outcomes. The sensitivity-dependent policy trades a higher post-withdrawal permission rate for a lower legitimate denial rate relative to fixed two-hour expiry. See [counts and interpretation](RESULTS.md).
 
+## Revocation transport study
+
+A second executable study examines whether prioritising small authenticated revocation messages over queued research uploads can reduce stale-consent exposure. The comparison uses the same contact schedule, byte budget and withdrawal event across four policies, with and without a fixed expiry. The local gateway binds decisions to a synthetic contributor and dataset, rejects modified or replayed messages, and prevents reads after a received withdrawal or expiry.
+
+- [Revocation transport model](revocation.py)
+- [Paired transport experiment](transport_experiment.py)
+- [Failure-state tests](test_revocation.py)
+- [Transport study design and boundaries](TRANSPORT.md)
+
+Run `python transport_experiment.py` to obtain the comparative latency and access counts. The transport study is distinct from the original expiry experiment below; it evaluates an executable local gateway, not a deployed communications network.
+
 ## Architecture
 
 ```mermaid
@@ -59,6 +70,7 @@ cd community-data-covenants
 python -m unittest -v
 python demo.py
 python experiment.py
+python transport_experiment.py
 ```
 
 The experiment writes subgroup counts to `results.csv` and prints aggregate error rates. It generates 9,000 synthetic episodes with 30 requests per episode, replayed across five policies. The 270,000 requests per policy are simulated events, not people or clinical observations.
