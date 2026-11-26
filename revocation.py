@@ -70,3 +70,31 @@ def delivery_time(withdrawal, contacts, backlog_bytes, capacity_bytes, priority,
         if remaining <= 0:
             return t
     return None
+
+def schedule(withdrawal, contacts, backlog_bytes, capacity_bytes, priority, message_bytes):
+    """Track both payloads under a conserved per-contact byte budget."""
+    if min(backlog_bytes, message_bytes) < 0 or capacity_bytes <= 0 or message_bytes == 0:
+        raise ValueError('invalid byte budget')
+    if list(contacts) != sorted(set(contacts)):
+        raise ValueError('contacts must be strictly increasing')
+    upload, control = backlog_bytes, message_bytes
+    delivered = None
+    upload_done = 0 if upload == 0 else None
+    for t in contacts:
+        budget = capacity_bytes
+        order = ('control', 'upload') if priority and t >= withdrawal else ('upload', 'control')
+        for kind in order:
+            if kind == 'control' and t >= withdrawal and control:
+                sent = min(control, budget)
+                control -= sent
+                budget -= sent
+                if control == 0:
+                    delivered = t
+            elif kind == 'upload' and upload:
+                sent = min(upload, budget)
+                upload -= sent
+                budget -= sent
+                if upload == 0:
+                    upload_done = t
+        assert budget >= 0
+    return delivered, upload_done, upload, control
