@@ -6,7 +6,7 @@ Each synthetic episode shares its withdrawal time, queued upload size, contact t
 
 The simulator assumes a trusted initial grant and a shared symmetric key. It checks message integrity, scope, version and clock ordering. It does not implement key distribution, identity proofing, real network delivery, durable queues, packet loss, retransmission acknowledgements or a production security boundary. The transport experiment isolates the revocation mechanism; it does not integrate the collective-governance and obligation rules of the original reference model.
 
-Priority scheduling can delay ordinary uploads. This experiment does not quantify that cost, retry completion or participant-level exclusion. It is a controlled mechanistic comparison rather than evidence that prioritisation is novel or universally beneficial. No patient data are used.
+Priority scheduling can delay ordinary uploads. The extended experiment tracks completion times, unfinished uploads and remaining bytes under the same per-contact byte budget. Completion times are conditional on completion within the 1,440-minute horizon; unfinished transfers are reported separately. The experiment does not quantify access retry completion or participant-level exclusion. It is a controlled mechanistic comparison rather than evidence that prioritisation is novel or universally beneficial. No patient data are used.
 
 ## Reproduction
 
