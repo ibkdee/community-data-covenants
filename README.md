@@ -4,6 +4,8 @@
 
 Community Data Covenants is a research prototype exploring how institutions can honour changing individual permissions, community-defined restrictions and data-use obligations when connectivity is unreliable. Its intended application is sensitive community-based research, including mental health AI.
 
+[Interactive research laboratory](https://ibkdee.github.io/community-data-covenants/) · [Experimental findings](RESULTS.md) · [Reproduce the study](METHODOLOGY.md)
+
 ## Why this matters
 
 A consent withdrawal recorded on an offline device may not reach a research institution immediately. Persistent access permissions can therefore outlive the contributor's authorisation. Shorter access windows reduce this risk, but may also interrupt legitimate research involving poorly connected communities.
@@ -19,6 +21,18 @@ This project examines that tension through a policy decision model and a reprodu
 | [Automated tests](test_covenant.py) | Checks decision boundaries, withdrawal, conflicts, obligations and experimental reproducibility. |
 | [Methodology](METHODOLOGY.md) | Defines scenarios, denominators and interpretation. |
 | [Scope and safeguards](LIMITATIONS.md) | Describes technical boundaries, ethical safeguards and development provenance. |
+
+## Experimental findings
+
+| Access policy | Post-withdrawal requests permitted | Legitimate requests denied |
+| --- | ---: | ---: |
+| Persistent | 100.00% | 0.00% |
+| Fixed 30 minutes | 8.78% | 78.20% |
+| Fixed 120 minutes | 37.02% | 51.32% |
+| Fixed 480 minutes | 69.18% | 20.85% |
+| Sensitivity-dependent | 39.30% | 49.16% |
+
+The experiment uses 36,237 post-withdrawal and 233,763 legitimate synthetic requests per policy. No policy dominates all alternatives on both outcomes. The sensitivity-dependent policy trades a higher post-withdrawal permission rate for a lower legitimate denial rate relative to fixed two-hour expiry. See [counts and interpretation](RESULTS.md).
 
 ## Architecture
 
@@ -43,6 +57,7 @@ Python 3.10 or later is required. No third-party dependencies or credentials are
 git clone https://github.com/ibkdee/community-data-covenants.git
 cd community-data-covenants
 python -m unittest -v
+python demo.py
 python experiment.py
 ```
 
