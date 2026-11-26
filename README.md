@@ -20,6 +20,21 @@ This project examines that tension through a policy decision model and a reprodu
 | [Methodology](METHODOLOGY.md) | Defines scenarios, denominators and interpretation. |
 | [Scope and safeguards](LIMITATIONS.md) | Describes technical boundaries, ethical safeguards and development provenance. |
 
+## Architecture
+
+```mermaid
+flowchart TD
+    A[Individual consent] --> D[Policy decision]
+    B[Community restrictions] --> D
+    C[Verified obligations] --> D
+    E[Recipient and version checks] --> D
+    D --> F{All conditions satisfied?}
+    F -->|Yes| G[Time-limited authorisation]
+    F -->|No| H[Denial with reasons]
+```
+
+The diagram represents the implemented decision logic, not a deployed network architecture.
+
 ## Run locally
 
 Python 3.10 or later is required. No third-party dependencies or credentials are needed.
