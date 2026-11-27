@@ -49,7 +49,7 @@ Run `python transport_experiment.py` to obtain the comparative latency and acces
 
 The [persistent custodian model](custodian.py) stores scoped withdrawal state in SQLite and returns an authenticated acknowledgement only after the transaction commits. Repeated delivery of the same event returns the original acknowledgement; missing or mismatched receipts remain unconfirmed. The [custodian tests](test_custodian.py) cover restart recovery, replay, modified events and partial confirmation.
 
-This component is a local model of independently operated custodians. It does not implement a real multi-institution network, prove deletion of exported copies, or protect against restoration of an older database backup. The three research components are independently executable; they are not yet an integrated production service.
+This component is a local model of independently operated custodians. It does not implement a real multi-institution network, prove deletion of exported copies, or protect against restoration of an older database backup. The components can run independently or together in the synthetic workflow; they do not constitute a production service.
 
 ## Consent Assurance Receipt
 
@@ -59,9 +59,9 @@ The [assurance tests](test_assurance.py) cover invalid authentication, future ti
 
 ## Run a complete synthetic governance scenario
 
-Run `python workflow_demo.py` to see the policy, transport, custodian and assurance components operate together. The scenario permits academic access, denies a community-prohibited commercial purpose and an overdue obligation, schedules a withdrawal, distinguishes delivery from enforcement and records partial then complete acknowledgement within a known two-custodian scope.
+Run `python workflow_demo.py` to see the policy, transport, custodian and assurance components operate together. The scenario permits academic access, denies a community-prohibited commercial purpose and an overdue obligation, schedules a withdrawal, distinguishes delivery from enforcement and records partial then complete acknowledgement across two participating institutions.
 
-The [workflow](workflow_demo.py) and [integration test](test_workflow_demo.py) are executable scenario evidence, not a production integration. The clock, keys, policy inputs and institutions are synthetic. Acknowledgements describe historical enforcement at a particular time, not a guarantee of current state; database rollback and undiscovered custodians remain unresolved.
+The [workflow](workflow_demo.py) and [integration test](test_workflow_demo.py) demonstrate how the components work together in a controlled environment. The clock, keys, policy inputs and institutions are synthetic. Acknowledgements describe historical enforcement at a particular time, not a guarantee of current state; database rollback and undiscovered custodians remain unresolved.
 
 ## Architecture
 
