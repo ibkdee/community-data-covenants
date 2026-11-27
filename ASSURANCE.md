@@ -15,10 +15,10 @@ An acknowledgement is not independent proof of deletion, downstream compliance o
 
 ## Historical evidence and scope
 
-An authenticated enforcement acknowledgement reports the time at which a participating custodian committed withdrawal. It does not establish current state after a database rollback, a later policy change or an unauthorised export. A missing acknowledgement is uncertainty, not proof of non-compliance. Irreversibly anonymised records may no longer be linkable to a contributor. The [end-to-end scenario](workflow_demo.py) demonstrates the current reference components under trusted synthetic inputs.
+An authenticated enforcement acknowledgement reports the time at which a participating custodian committed withdrawal. It does not establish current state after a database rollback, a later policy change or an unauthorised export. Without an acknowledgement, the institution's enforcement status remains unknown. Irreversibly anonymised records may no longer be linkable to a contributor. The [end-to-end scenario](workflow_demo.py) demonstrates the current reference components under trusted synthetic inputs.
 
 ## Research direction
 
 Evaluate comprehension of the receipt, accessibility for contributors with limited digital literacy, delayed acknowledgement, duplicate and conflicting messages, and recovery after interrupted connectivity. Before sensitive-data use, establish representation safeguards, identity and key management, data lifecycle boundaries, independent security assessment and ethical approval.
 
-The demonstration and reference code use fictional institutions and synthetic identifiers only. No clinical deployment or host integration is asserted.
+The demonstration and reference code use fictional institutions and synthetic identifiers only. The prototype has not been deployed in a clinical setting or integrated with an external research platform.
