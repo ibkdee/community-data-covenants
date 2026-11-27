@@ -20,7 +20,7 @@ This project examines that tension through a policy decision model and a reprodu
 | [Comparative experiment](experiment.py) | Compares five expiry policies using identical synthetic request sequences. |
 | [Automated tests](test_covenant.py) | Checks decision boundaries, withdrawal, conflicts, obligations and experimental reproducibility. |
 | [Methodology](METHODOLOGY.md) | Defines scenarios, denominators and interpretation. |
-| [Scope and safeguards](LIMITATIONS.md) | Describes technical boundaries, ethical safeguards and development provenance. |
+| [Scope and safeguards](LIMITATIONS.md) | Describes technical boundaries and ethical safeguards. |
 
 ## Experimental findings
 
@@ -104,7 +104,7 @@ The comparative experiment is a separate analytical model; it does not exercise 
 
 Research prototype. The repository contains executable reference logic and a synthetic experimental design, not a deployed access-control service. Message authentication and local persistent withdrawal state are implemented in separate components. User identity verification, real network synchronisation, community validation and independent security assessment remain outside their scope.
 
-The project uses no patient information or proprietary client data. ChatGPT assisted with concept development, implementation, tests and documentation.
+The project uses no patient information or proprietary client data.
 
 ## Research foundations
 
