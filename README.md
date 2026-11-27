@@ -4,7 +4,7 @@
 
 Community Data Covenants is a research prototype exploring how institutions can honour changing individual permissions, community-defined restrictions and data-use obligations when connectivity is unreliable. Its intended application is sensitive community-based research, including mental health AI.
 
-[Interactive research laboratory](https://ibkdee.github.io/community-data-covenants/) · [Experimental findings](RESULTS.md) · [Reproduce the study](METHODOLOGY.md)
+[Interactive research laboratory](https://ibkdee.github.io/community-data-covenants/) · [Experimental findings](RESULTS.md) · [Reproduce the study](METHODOLOGY.md) · [Consent Assurance Receipt](ASSURANCE.md)
 
 ## Why this matters
 
@@ -59,7 +59,7 @@ The [assurance tests](test_assurance.py) cover invalid authentication, future ti
 
 ## Run a complete synthetic governance scenario
 
-Run `python workflow_demo.py` to see the policy, transport, custodian and assurance components operate together. The scenario permits academic access, denies a community-prohibited commercial purpose and an overdue obligation, schedules a withdrawal, distinguishes delivery from enforcement and records partial then complete acknowledgement across two participating institutions.
+Run `python workflow_demo.py` to see the policy, transport, custodian and assurance components operate together. The scenario permits academic access, denies commercial use prohibited by the community and access when an obligation is overdue, schedules a withdrawal, distinguishes delivery from enforcement and records partial then complete acknowledgement across two participating institutions.
 
 The [workflow](workflow_demo.py) and [integration test](test_workflow_demo.py) demonstrate how the components work together in a controlled environment. The clock, keys, policy inputs and institutions are synthetic. Acknowledgements describe historical enforcement at a particular time, not a guarantee of current state; database rollback and undiscovered custodians remain unresolved.
 
@@ -80,7 +80,7 @@ The diagram represents the implemented decision logic, not a deployed network ar
 
 ## Run locally
 
-Python 3.10 or later is required. No third-party dependencies or credentials are needed.
+Python 3.10 or later is required. The published numerical results are reproduced with Python 3.13.5, the version used by the automated verification workflow. No third-party dependencies or credentials are needed.
 
 ```bash
 git clone https://github.com/ibkdee/community-data-covenants.git
@@ -92,7 +92,7 @@ python experiment.py
 python transport_experiment.py
 ```
 
-The experiment writes subgroup counts to `results.csv` and prints aggregate error rates. It generates 9,000 synthetic episodes with 30 requests per episode, replayed across five policies. The 270,000 requests per policy are simulated events, not people or clinical observations.
+The experiment writes subgroup counts to [`results.csv`](results.csv) and prints aggregate error rates. The [verification workflow](.github/workflows/verify.yml) checks both experiments against the committed CSV files. It generates 9,000 synthetic episodes with 30 requests per episode, replayed across five policies. The 270,000 requests per policy are simulated events, not people or clinical observations.
 
 ## Governance model
 
@@ -110,4 +110,4 @@ The project uses no patient information or proprietary client data.
 
 The approach draws on existing work in machine-readable data-use conditions, including [W3C ODRL](https://www.w3.org/TR/odrl-model/) and the [GA4GH Data Use Ontology](https://www.ga4gh.org/product/data-use-ontology-duo/). It investigates their practical application and associated distributional trade-offs rather than claiming to invent consent management or policy enforcement.
 
-Project materials are publicly inspectable; no software licence has yet been granted.
+The project software and associated documentation are available under the [MIT License](LICENSE). This licence does not grant permission to use third-party or personal data.
