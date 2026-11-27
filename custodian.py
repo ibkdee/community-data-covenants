@@ -5,6 +5,7 @@ import hmac
 import hashlib
 from dataclasses import dataclass, asdict
 from pathlib import Path
+from contextlib import closing
 from revocation import Revocation, sign
 
 @dataclass(frozen=True)
@@ -37,7 +38,7 @@ class Custodian:
         # Exclusive creation prevents accidental reinitialisation of existing state.
         with self.path.open('xb'):
             pass
-        with sqlite3.connect(self.path) as db:
+        with closing(sqlite3.connect(self.path)) as db, db:
             db.execute('CREATE TABLE state (custodian TEXT, contributor TEXT, dataset TEXT, version INTEGER, revoked INTEGER, event_tag TEXT, enforced_at INTEGER)')
             db.execute('INSERT INTO state VALUES (?,?,?,1,0,NULL,NULL)', self.scope)
 
@@ -48,7 +49,6 @@ class Custodian:
         return rows[0]
 
     def read(self):
-        from contextlib import closing
         try:
             with closing(self.connect()) as db:
                 if self.state(db)[4]:
@@ -58,7 +58,6 @@ class Custodian:
             raise PermissionError('state unavailable') from exc
 
     def receive(self, event, now):
-        from contextlib import closing
         if not isinstance(event, Revocation) or (event.contributor,event.dataset) != self.scope[1:]:
             return None
         if type(now) is not int or type(event.issued) is not int or type(event.version) is not int or not 0 <= event.issued <= now:
