@@ -2,12 +2,12 @@
 
 A contributor-facing view of withdrawal progress across known participating institutions.
 
-The current custodian implementation generates an authenticated enforcement acknowledgement after committing withdrawal state to its local database. The proposed receipt extends that mechanism into a readable account of institutional responses.
+The current custodian implementation generates an authenticated enforcement acknowledgement after committing withdrawal state to its local database. The reference receipt model in [assurance.py](assurance.py) extends that mechanism into a readable account of institutional responses.
 
 ## Status semantics
 
 - **Awaiting confirmation:** no valid acknowledgement has been verified. This does not establish that the institution is offline or has failed to act.
-- **Receipt acknowledged:** an authenticated delivery acknowledgement is available, but enforcement is not yet confirmed. This is a proposed extension.
+- **Receipt acknowledged:** an authenticated delivery acknowledgement is available, but enforcement is not yet confirmed. This is implemented as a trusted synthetic receiver attestation, not actual network delivery.
 - **Enforcement acknowledged:** the existing local custodian model reports committed withdrawal state.
 - **All known custodians acknowledged:** every member of the specified, non-empty custodian set has supplied a matching enforcement acknowledgement.
 
