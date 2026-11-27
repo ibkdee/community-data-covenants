@@ -9,8 +9,22 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.13.5'
       - run: python -m unittest -v
-      - run: python experiment.py
-
-      - run: python transport_experiment.py
+      - run: python workflow_demo.py
+      - name: Reproduce published results
+        run: |
+          python experiment.py
+          python transport_experiment.py > reproduced-transport.csv
+          python - <<'PY'
+          import csv
+          import subprocess
+          import io
+          from pathlib import Path
+          for published, generated in [('results.csv', 'results.csv'), ('transport-results.csv', 'reproduced-transport.csv')]:
+              expected = subprocess.check_output(['git', 'show', 'HEAD:' + published]).decode()
+              actual = Path(generated).read_text()
+              if list(csv.reader(io.StringIO(expected))) != list(csv.reader(io.StringIO(actual))):
+                  raise SystemExit('Reproduction mismatch: ' + published)
+              print('Reproduced:', published)
+          PY
