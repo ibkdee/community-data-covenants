@@ -43,7 +43,13 @@ A second executable study examines whether prioritising small authenticated revo
 - [Failure-state tests](test_revocation.py)
 - [Transport study design and boundaries](TRANSPORT.md)
 
-Run `python transport_experiment.py` to obtain the comparative latency and access counts. The transport study is distinct from the original expiry experiment below; it evaluates an executable local gateway, not a deployed communications network.
+Run `python transport_experiment.py` to obtain the comparative latency and access counts. The transport study is distinct from the original expiry experiment above; it evaluates an executable local gateway, not a deployed communications network.
+
+## Custodian acknowledgement prototype
+
+The [persistent custodian model](custodian.py) stores scoped withdrawal state in SQLite and returns an authenticated acknowledgement only after the transaction commits. Repeated delivery of the same event returns the original acknowledgement; missing or mismatched receipts remain unconfirmed. The [custodian tests](test_custodian.py) cover restart recovery, replay, modified events and partial confirmation.
+
+This component is a local model of independently operated custodians. It does not implement a real multi-institution network, prove deletion of exported copies, or protect against restoration of an older database backup. The three research components are independently executable; they are not yet an integrated production service.
 
 ## Architecture
 
@@ -83,7 +89,7 @@ The comparative experiment is a separate analytical model; it does not exercise 
 
 ## Development status
 
-Research prototype. The repository contains executable reference logic and a synthetic experimental design, not a deployed access-control service. Authentication, offline synchronisation, community validation and independent security assessment are outside the current implementation.
+Research prototype. The repository contains executable reference logic and a synthetic experimental design, not a deployed access-control service. Message authentication and local persistent withdrawal state are implemented in separate components. User identity verification, real network synchronisation, community validation and independent security assessment remain outside their scope.
 
 The project uses no patient information or proprietary client data. ChatGPT assisted with concept development, implementation, tests and documentation.
 
