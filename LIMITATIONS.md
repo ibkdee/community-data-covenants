@@ -18,6 +18,3 @@ Individual refusal takes precedence over collective approval. Access to healthca
 
 No community deployment, host partnership or independent security assessment has been established. Any sensitive-data implementation would require participatory design, appropriate legal and ethics review, and security assessment.
 
-## Development provenance
-
-ChatGPT assisted with concept development, software implementation, test design and documentation. The development history records the evolution of the research prototype.
